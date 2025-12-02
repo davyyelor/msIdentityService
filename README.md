@@ -1,10 +1,21 @@
 # $Nombre Proyecto (Actualizar)
 
-<div align="center">
+# User Service (Spring Boot)
 
-# $Descripción Proyecto (Actualizar
+Microservicio de gestión de usuarios para ecosistemas de transporte (ALSA/RENFE).
 
-### Spring Boot - Plantilla Proyecto Limpia
+## 🚀 API Docs
+
+Swagger UI:
+👉 http://localhost:8080/swagger-ui.html
+
+OpenAPI YAML:
+👉 /openapi.yaml
+
+## 🧩 Backstage Integration
+
+Este servicio está registrado en Backstage en:
+👉 URL_DE_BACKSTAGE<div align="center">
 
 <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/spring/spring-original.svg" width="50">
 <img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/java_logo_icon_168609.png" width="120" alt="Java Logo">
@@ -13,47 +24,4 @@
 
 </div>
 
----
-
-## 🧱 Descripción
-
-Este proyecto ha sido generado con el *template* **Spring Boot Clean Architecture**.
-Su objetivo es ofrecer una estructura estándar, escalable y alineada con buenas prácticas utilizadas en entornos profesionales (hexagonal/clean architecture).
-
-Incluye una arquitectura clara basada en capas lógicas:
-
-- **Controller** (endpoints REST)
-- **Service** (lógica de negocio)
-- **Repository** (acceso a datos)
-- **Domain / Model** (entidades)
-- **Config** (opcional)
-- **Logger** (opcional)
-- **Utils** (opcional)
-- **Mapper** (opcional)
-- **Constants** (opcional)
-
----
-
-## 🏗️ Estructura del proyecto generada
-
-```plaintext
-msIdentityService/
- ├── src/
- │   ├── main/
- │   │   ├── java/com/example/msIdentityService/
- │   │   │   ├── controller/
- │   │   │   ├── service/
- │   │   │   ├── repository/
- │   │   │   ├── model/
- │   │   │   ├── config/        (opcional)
- │   │   │   ├── logger/        (opcional)
- │   │   │   ├── util/          (opcional)
- │   │   │   ├── mapper/        (opcional)
- │   │   │   ├── constant/      (opcional)
- │   │   └── resources/
- │   │       ├── application.yml
- │   └── test/
- ├── pom.xml
- ├── README.md
- └── catalog-info.yaml
 ```
