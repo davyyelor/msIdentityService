@@ -1,19 +1,51 @@
+# ===========================
+# COMPONENT
+# ===========================
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: msIdentityService
-  description: "Servicio generado con el template Spring Boot Clean Architecture"
+  name: ms-identity-service
+  description: Servicio de gestión de usuarios e identidad
   tags:
     - java
     - springboot
-    - clean-architecture
+    - identity
+    - authentication
+  annotations:
+    github.com/project-slug: davyyelor/msIdentityService
+    backstage.io/techdocs-ref: dir:.
 spec:
   type: service
   lifecycle: production
   owner: user:davidelorzag
+  providesApis:
+    - ms-identity-service-api   # <-- RELACIÓN CLAVE
 
-  # URL del repositorio generado automáticamente
   links:
     - url: https://github.com/davyyelor/msIdentityService
-      title: Repositorio GitHub
+      title: Repositorio en GitHub
       icon: github
+
+
+---
+
+# ===========================
+# API
+# ===========================
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: ms-identity-service-api
+  description: API REST para gestión de usuarios, autenticación y roles.
+  tags:
+    - openapi
+    - identity
+    - auth
+  annotations:
+    backstage.io/openapi-ref: ./openapi.yaml   # <-- para mostrar Swagger en Backstage
+spec:
+  type: openapi
+  lifecycle: production
+  owner: user:davidelorzag
+  definition:
+    $text: ./openapi.yaml
