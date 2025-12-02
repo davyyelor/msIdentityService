@@ -1,0 +1,202 @@
+openapi: 3.0.3
+info:
+  title: MS Identity Service API
+  version: 1.0.0
+  description: API para autenticación, gestión de usuarios y roles en el entorno ALSA/RENFE.
+
+servers:
+  - url: http://localhost:8080
+    description: Local Development
+
+paths:
+
+  /auth/login:
+    post:
+      summary: Login de usuario
+      description: Autentica al usuario y devuelve un token JWT.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [username, password]
+              properties:
+                username:
+                  type: string
+                  example: user@example.com
+                password:
+                  type: string
+                  example: myPassword123
+      responses:
+        '200':
+          description: Login correcto
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                  refresh_token:
+                    type: string
+        '401':
+          description: Credenciales inválidas
+
+  /auth/refresh:
+    post:
+      summary: Refrescar token
+      description: Genera un nuevo token usando el refresh token.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [refresh_token]
+              properties:
+                refresh_token:
+                  type: string
+      responses:
+        '200':
+          description: Token renovado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                  refresh_token:
+                    type: string
+        '401':
+          description: Refresh token inválido o expirado
+
+  /auth/logout:
+    post:
+      summary: Logout
+      description: Invalida el token de sesión.
+      responses:
+        '200':
+          description: Sesión cerrada correctamente
+
+  /auth/register:
+    post:
+      summary: Registrar nuevo usuario
+      description: Registro de usuario final en el sistema ALSA.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [username, email, password]
+              properties:
+                username:
+                  type: string
+                  example: jdoe
+                email:
+                  type: string
+                  example: jdoe@example.com
+                password:
+                  type: string
+                  example: mySecurePassword
+      responses:
+        '201':
+          description: Usuario creado
+        '400':
+          description: Datos inválidos
+
+  /users/{id}:
+    get:
+      summary: Obtener datos de usuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Información del usuario
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  username:
+                    type: string
+                  email:
+                    type: string
+        '404':
+          description: Usuario no encontrado
+
+    put:
+      summary: Actualizar datos del usuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+      responses:
+        '200':
+          description: Usuario actualizado
+        '404':
+          description: Usuario no encontrado
+
+  /users/{id}/roles:
+    get:
+      summary: Obtener roles de un usuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Lista de roles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+
+    post:
+      summary: Asignar rol a usuario
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [role]
+              properties:
+                role:
+                  type: string
+                  example: ADMIN
+      responses:
+        '200':
+          description: Rol asignado correctamente
+        '404':
+          description: Usuario no encontrado
