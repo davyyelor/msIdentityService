@@ -18,8 +18,9 @@ spec:
   type: service
   lifecycle: production
   owner: user:davidelorzag
+  system: sistema-identidad-accesos         
   providesApis:
-    - ms-identity-service-api   # <-- RELACIÓN CLAVE
+    - ms-identity-service-api
 
   links:
     - url: https://github.com/davyyelor/msIdentityService
@@ -28,7 +29,6 @@ spec:
 
 
 ---
-
 # ===========================
 # API
 # ===========================
@@ -42,10 +42,11 @@ metadata:
     - identity
     - auth
   annotations:
-    backstage.io/openapi-ref: ./openapi.yaml   # <-- para mostrar Swagger en Backstage
+    backstage.io/openapi-ref: ./openapi.yaml
 spec:
   type: openapi
   lifecycle: production
   owner: user:davidelorzag
+  system: sistema-identidad-accesos        
   definition:
     $text: ./openapi.yaml
