@@ -17,7 +17,7 @@ metadata:
 spec:
   type: service
   lifecycle: production
-  owner: Infrastructure
+  owner: group:sistemas
   system: openshift       
   providesApis:
     - ms-identity-service-api
@@ -46,9 +46,10 @@ metadata:
 spec:
   type: openapi
   lifecycle: production
-  owner: Infrastructure
+  owner: group:sistemas
   system: openshift      
   definition:
     $text: ./openapi.yaml
+
 
 
